@@ -7,7 +7,9 @@ btn.addEventListener('click', () => {
 
 const getResult = () => {
   const inpValue = input.value.split(' ').join('');
-  result.innerHTML = total(inpValue);
+  total(inpValue)
+    ? (result.innerHTML = total(inpValue))
+    : (result.innerHTML = 0);
 };
 
 const total = (fn) => {
