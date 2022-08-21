@@ -11,7 +11,6 @@ Just change the value of "inpValue"
 */
 const getResult = () => {
   // Use for NEW FUNCTION
-
   const inpValue = input.value.split(' ').join('');
   getTotal(inpValue)
     ? (result.innerHTML = getTotal(inpValue))
@@ -54,6 +53,9 @@ const getSign = (inpValue) => {
       if (el === '*' || el === '/') {
         let spliceArray = InpValArray.splice(i - 1, 3);
         rubbish = InpValArray.splice(i - 2, 1);
+        console.log('spliceArray : ', spliceArray);
+        rubbish = InpValArray.splice(i - 2, 1);
+        console.log('rubbish ', rubbish);
         inpValue = InpValArray.splice(0, 0, spliceArray);
         inpValue = InpValArray.splice(3, 0, rubbish);
       }
@@ -73,6 +75,7 @@ const getSign = (inpValue) => {
 
 const operate = () => {
   const mainResult = document.querySelector('#result');
+  let InpValArray = numTest.split(',');
 
   let InpValArray = numTest.split(',');
   let result = 0;
@@ -116,7 +119,10 @@ const operate = () => {
         break;
     }
   }
-
+        break;
+    }
+  }
+  console.log(result);
   return result;
 };
 
@@ -133,12 +139,12 @@ const div = (a, b) => {
   return parseInt(a) / parseInt(b);
 };
 */
+
 /*
   NEW FUNCTION
 This function use the Function Creator. Implemented by JavaScript to get imediatly result.
 Not allowed for this exercise but functional
 */
-
 const getTotal = (value) => {
   return new Function('return ' + value)();
 };
