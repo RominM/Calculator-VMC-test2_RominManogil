@@ -5,14 +5,34 @@ btn.addEventListener('click', () => {
   getResult();
 });
 
+/*
+Use the same function (getResult) fro both algorythm.
+Just change the value of "inpValue" 
+*/
 const getResult = () => {
-  // const inpValue = input.value.split(' ').join(''); // From new Fuction
-  const inpValue = input.value; // From Native
+  // Use for NEW FUNCTION
+  const inpValue = input.value.split(' ').join('');
+
+  // Use this for NATIVE ALGORYTHM
+  // const inpValue = input.value;
+
+  // Get total
   getTotal(inpValue)
     ? (result.innerHTML = getTotal(inpValue))
     : (result.innerHTML = 0);
 };
 
+/*
+  NATIVE ALGORYTHM
+This algorythm use native methods from JavaScript.
+  Not completly working yet.
+  You can make simples calculs.
+  Writing is from left to right.
+    no priority
+    no parentheses
+*/
+// Comment below to toggle
+/*
 let sign = [];
 let numTest = '';
 
@@ -26,24 +46,20 @@ const getTotal = (inpValue) => {
 const getSign = (inpValue) => {
   inpValue = inpValue.replaceAll(' ', '');
 
-  let array = inpValue.split('');
-  let trash1 = [];
-  if (array.includes('*') || array.includes('/')) {
-    array.forEach((el, i) => {
+  let InpValArray = inpValue.split('');
+  let rubbish = [];
+  if (InpValArray.includes('*') || InpValArray.includes('/')) {
+    InpValArray.forEach((el, i) => {
       if (el === '*' || el === '/') {
-        console.log('array[i] : ' + array[i]);
-
-        let trash = array.splice(i - 1, 3);
-        console.log('array[i] : ' + array[i]);
-        trash1 = array.splice(i - 2, 1);
-        inpValue = array.splice(0, 0, trash);
-        inpValue = array.splice(3, 0, trash1);
-        console.log(inpValue);
+        let spliceArray = InpValArray.splice(i - 1, 3);
+        console.log('spliceArray : ', spliceArray);
+        rubbish = InpValArray.splice(i - 2, 1);
+        console.log('rubbish ', rubbish);
+        inpValue = InpValArray.splice(0, 0, spliceArray);
+        inpValue = InpValArray.splice(3, 0, rubbish);
       }
     });
   }
-
-  console.log('print array : ' + array);
 
   if (inpValue[0] === '-') numTest += 0;
   [...inpValue].forEach((el, i) => {
@@ -57,37 +73,39 @@ const getSign = (inpValue) => {
 };
 
 const operate = () => {
-  // numTest = numTest.split(',');
-  let array = numTest.split(',');
+  let InpValArray = numTest.split(',');
 
   let result = 0;
-  let trash = [];
+  let spliceArray = [];
   for (let i = 0; i < sign.length; i++) {
     let temp = sign[i];
 
     switch (temp) {
       case '+':
-        result = add(array[0], array[1]);
-        array[0] = result;
-        trash = array.splice(1, 1);
+        result = add(InpValArray[0], InpValArray[1]);
+        InpValArray[0] = result;
+        spliceArray = InpValArray.splice(1, 1);
         break;
       case '-':
-        result = sous(array[0], array[1]);
-        array[0] = result;
-        trash = array.splice(1, 1);
+        result = sous(InpValArray[0], InpValArray[1]);
+        InpValArray[0] = result;
+        spliceArray = InpValArray.splice(1, 1);
         break;
       case '*':
-        result = mult(array[0], array[1]);
-        array[0] = result;
-        trash = array.splice(1, 1);
+        result = mult(InpValArray[0], InpValArray[1]);
+        InpValArray[0] = result;
+        spliceArray = InpValArray.splice(1, 1);
         break;
       case '/':
-        result = div(array[0], array[1]);
-        array[0] = result;
-        trash = array.splice(1, 1);
+        result = div(InpValArray[0], InpValArray[1]);
+        InpValArray[0] = result;
+        spliceArray = InpValArray.splice(1, 1);
         break;
     }
   }
+  console.log(result);
+
+  return result;
 };
 
 const add = (a, b) => {
@@ -102,10 +120,16 @@ const mult = (a, b) => {
 const div = (a, b) => {
   return parseInt(a) / parseInt(b);
 };
+*/
 
 /*
+  NEW FUNCTION
+This function use the Function Creator. Implemented by JavaScript to get imediatly result.
+Not allowed for this exercise but functional
+*/
+
+// Uncomment below to toggle
 
 const getTotal = (value) => {
   return new Function('return ' + value)();
 };
-*/
